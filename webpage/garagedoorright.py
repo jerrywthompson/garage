@@ -8,16 +8,16 @@ import time
 GPIO.setmode(GPIO.BCM)
 
 # GPIO# assigned to garage door
-pinNum = [18]
+pinNum = [17]
 
 # set mode and state to 'high' to activate garage door
 GPIO.setup(pinNum, GPIO.OUT)
-GPIO.output(pinNum, GPIO.HIGH)
+GPIO.output(pinNum, GPIO.LOW)
 
-time.sleep(0.5)
+time.sleep(1.0)
 
 # Set pin back to low
-GPIO.output(pinNum, GPIO.LOW)
+GPIO.output(pinNum, GPIO.HIGH)
 
 # Reset GPIO settings
 GPIO.cleanup()
