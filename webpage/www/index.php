@@ -94,7 +94,7 @@ $which_door = $_GET['door'];
 
 if (isset($_POST['RightOPEN']))
 {
-exec("sudo python /home/pi/garageDoorProject/webpage/garagedoorright.py");
+exec("sudo python /var/www/html/garageBuddy/scripts/py/garagedoorright.py");
 }
 if (isset($_POST['LeftOPEN']))
 {
@@ -157,7 +157,7 @@ function callLeft()
 function callRight()
 {
 	$.ajax({
-		url: 'right.php',
+		url: 'scripts/php/right.php',
 		success: loadDataSuccess,
 		error : loadError
 	});
