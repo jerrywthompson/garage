@@ -1,8 +1,8 @@
 <?php
 
 // Define your username and password
-$username = "jerry";
-$password = "jerry";
+$username = "test";
+$password = "test";
 
 if ($_POST['txtUsername'] != $username || $_POST['txtPassword'] != $password) {
 
@@ -94,11 +94,11 @@ $which_door = $_GET['door'];
 
 if (isset($_POST['RightOPEN']))
 {
-exec("sudo python /var/www/html/garageBuddy/scripts/py/garagedoorright.py");
+exec("sudo python /var/www/html/garagebuddy/scripts/py/garagedoorright.py");
 }
 if (isset($_POST['LeftOPEN']))
 {
-exec("sudo python /home/pi/garageDoorProject/webpage/garagedoorleft.py");
+exec("sudo python /var/www/html/garagebuddy/scripts/py/garagedoorleft.py");
 }
 
 unset($_POST);
@@ -148,7 +148,7 @@ switch(theDoor)
 function callLeft()
 {
 	$.ajax({
-		url: 'left.php',
+		url: 'scripts/php/left.php',
 		success: loadDataSuccess,
 		error : loadError
 	});
@@ -183,12 +183,10 @@ function loadDataSuccess(data)
 	//location.reload();
 	location.href = '?door='+data;
 }
-</script> <div style="width:100%; margin:0 auto;"> <img id="mjpeg_dest" 
-onclick="toggle_fullscreen(this);" 
-src="cam_pic.php?time=1500264292335&amp;pDelay=40000" class="fullscreen"> 
-</body> 
+</script>
+</body>
 </html>
-</div>
+
 
 </p>
 

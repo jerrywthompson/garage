@@ -5,7 +5,7 @@ import time
 GPIO.setmode(GPIO.BCM)
 
 # init list with pin numbers
-pinNum = 4
+pinNum = 17
 
 # set mode and state to 'high'
 GPIO.setup(pinNum, GPIO.OUT) 
