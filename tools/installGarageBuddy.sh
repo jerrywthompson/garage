@@ -17,6 +17,10 @@ sudo pip install -U Requests
 # Install and configure the alert
 echo "Installng the GarageBuddy alert"
 #git clone https://github.com/rllynch/pi_garage_alert.git
+# get config items
+echo "Getting config items from file"
+source garagebuddy.confg
+echo "emailfomr config: " $email  
 cd pi_garage_alert
 sudo cp bin/pi_garage_alert.py /usr/local/sbin/
 sudo cp etc/pi_garage_alert_config.py /usr/local/etc/
@@ -63,9 +67,9 @@ echo "********** Starting to update pi_garage_alert_config **********"
 
 # Add phone phone numbers for text alerting
 echo "Adding mobile phone numbers for text alerts"
-sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
 
 # Update GPIO pin numbers
 echo "Update GPIO pin numbers"
-sed -i-e 's/15/24/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i-e 's/15/24/g' /usr/local/etc/pi_garage_alert_config.py
 
