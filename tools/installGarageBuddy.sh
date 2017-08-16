@@ -1,5 +1,7 @@
+#!/bin/bash
+
 ### run the script with this command to write output to file and screen
-##   unbuffer installGarageBuddy.sh 2>&1 | garageBuddy.log outfile
+##   unbuffer bash installGarageBuddy.sh 2>&1 | tee garagebuddy.log
 
 # Update Raspbian
 echo "Updating the Raspbian image"
@@ -8,9 +10,9 @@ sudo apt-get -y upgrade
 sudo apt-get -y dist-upgrade
 
 # Install core apps
-echo "Installng the GarageBuddy alert"
+echo "Installng python and other core applications "
 sudo apt-get -y install python-setuptools python-dev libffi-dev libssl-dev
-sudo pip install -yU Requests
+sudo pip install -U Requests
 
 # Install and configure the alert
 echo "Installng the GarageBuddy alert"
@@ -20,10 +22,12 @@ sudo cp bin/pi_garage_alert.py /usr/local/sbin/
 sudo cp etc/pi_garage_alert_config.py /usr/local/etc/
 sudo cp init.d/pi_garage_alert /etc/init.d/
 sudo chown pi /usr/local/etc/pi_garage_alert_config.py
-sudo apt-get -y clean
+sudo apt-get clean
 
 # Setup and config email
 echo "Setting up email"
+debconf-set-selections <<< "postfix postfix/mailname string your.hostname.com"
+debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 echo "Updating /ect/postfix/main.cf"
 sudo sed -i -e 's/relayhost =/\
