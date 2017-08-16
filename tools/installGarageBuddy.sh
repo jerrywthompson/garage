@@ -16,7 +16,7 @@ sudo pip install -U Requests
 
 # Install and configure the alert
 echo "Installng the GarageBuddy alert"
-git clone https://github.com/rllynch/pi_garage_alert.git
+#git clone https://github.com/rllynch/pi_garage_alert.git
 cd pi_garage_alert
 sudo cp bin/pi_garage_alert.py /usr/local/sbin/
 sudo cp etc/pi_garage_alert_config.py /usr/local/etc/
@@ -26,8 +26,8 @@ sudo apt-get clean
 
 # Setup and config email
 echo "Setting up email"
-debconf-set-selections <<< "postfix postfix/mailname string your.hostname.com"
-debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+sudo debconf-set-selections <<< "postfix postfix/mailname string your.hostname.com"
+sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 echo "Updating /ect/postfix/main.cf"
 sudo sed -i -e 's/relayhost =/\
@@ -63,7 +63,7 @@ echo "********** Starting to update pi_garage_alert_config **********"
 
 # Add phone phone numbers for text alerting
 echo "Adding mobile phone numbers for text alerts"
-sed -i -e 's/email:someone@example.com/'"'"'email:8168853837@messaging.sprintpcs.com'"'"', '"'"'email:8165227655@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
+sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
 
 # Update GPIO pin numbers
 echo "Update GPIO pin numbers"

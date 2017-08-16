@@ -13,12 +13,12 @@ GARAGE_DOORS = [
             {
                 'state': 'open',
                 'time': 7200,
-                'recipients': [ 'email:8165227655@tmomail.net', 'email:8168853837@messaging.sprintpcs.com' ]
+                'recipients': [ emailAddressHere ]
             },
             {
                 'state': 'open',
                 'time': 18000,
-                'recipients': [ 'email:8165227655@tmomail.net', 'email:8168853837@messaging.sprintpcs.com']
+                'recipients': [ emailAddressHere ]
          }
         ]
     },
@@ -29,12 +29,12 @@ GARAGE_DOORS = [
             {
                 'state': 'open',
                 'time': 7200,
-                'recipients': [ 'email:8165227655@tmomail.net', 'email:8168853837@messaging.sprintpcs.com' ]
+                'recipients': [ emailAddressHere ]
             },
             {
                 'state': 'open',
                 'time': 18000,
-                'recipients': [ 'email:8165227655@tmomail.net', 'email:8168853837@messaging.sprintpcs.com' ]
+                'recipients': [ emailAddressHere ]
             }
         ]
     }
