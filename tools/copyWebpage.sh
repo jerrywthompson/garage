@@ -12,5 +12,5 @@ sudo rm -rf /var/www/html/garagebuddy
 
 # create new directory & copy all files and folders
 echo "********** Create and copy all files and folders to /var/www/html/garagebuddy **********"
-#sudo mkdir /var/www/html/garagebuddy && cp -vr *  /var/www/html/garagebudd
+#sudo mkdir /var/www/html/garagebuddy && cp -vr *  /var/www/html/garagebuddy
 cp -vr *  /var/www/html/
