@@ -67,6 +67,16 @@ echo "********** Starting to update pi_garage_alert_config **********"
 
 # Add phone phone numbers for text alerting
 echo "Adding mobile phone numbers for text alerts"
+echo "Getting config items from file"
+source garagebuddy.config
+echo "emailfomr config: " $email 
+# loop tough emails config items
+for i in ${email//,/ }
+do
+    # call your procedure/other scripts here below
+    echo "$i"
+done
+
 sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
 
 # Update GPIO pin numbers
