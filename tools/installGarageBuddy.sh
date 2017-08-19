@@ -20,6 +20,12 @@ echo "Installng the GarageBuddy alert"
 # get config items
 echo "Getting config items from file"
 source garagebuddy.config
+for i in ${email//,/ }
+do
+    # call your procedure/other scripts here below
+    echo "$i"
+done
+
 echo "emailfomr config: " $email  
 cd pi_garage_alert
 sudo cp bin/pi_garage_alert.py /usr/local/sbin/
