@@ -19,7 +19,7 @@ echo "Installng the GarageBuddy alert"
 #git clone https://github.com/rllynch/pi_garage_alert.git
 # get config items
 echo "Getting config items from file"
-source garagebuddy.confg
+source garagebuddy.config
 echo "emailfomr config: " $email  
 cd pi_garage_alert
 sudo cp bin/pi_garage_alert.py /usr/local/sbin/
@@ -76,6 +76,7 @@ do
     # call your procedure/other scripts here below
     echo "$i"
 done
+
 
 sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
 
