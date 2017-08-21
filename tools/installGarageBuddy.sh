@@ -53,8 +53,6 @@ sudo postmap /etc/postfix/sasl_passwd
 
 # Add phone phone numbers for text alerting
 echo "Adding mobile phone numbers for text alerts"
-echo "Getting config items from file"
-source garagebuddy.config
 
 # Update alert for each active garage door
 echo "Modify the pi_garage_alert_config.py for each active garage door"
