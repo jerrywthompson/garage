@@ -20,13 +20,7 @@ echo "Installng the GarageBuddy alert"
 # get config items
 echo "Getting config items from file"
 source garagebuddy.config
-for i in ${email//,/ }
-do
-    # call your procedure/other scripts here below
-    echo "$i"
-done
 
-echo "emailfomr config: " $email  
 cd pi_garage_alert
 sudo cp bin/pi_garage_alert.py /usr/local/sbin/
 sudo cp etc/pi_garage_alert_config.py /usr/local/etc/
@@ -34,15 +28,14 @@ sudo cp init.d/pi_garage_alert /etc/init.d/
 sudo chown pi /usr/local/etc/pi_garage_alert_config.py
 sudo apt-get clean
 
-# Setup and config email
-echo "Setting up email"
-sudo debconf-set-selections <<< "postfix postfix/mailname string your.hostname.com"
+
+sudo debconf-set-selections <<< $hostName
 sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 echo "Updating /ect/postfix/main.cf"
 sudo sed -i -e 's/relayhost =/\
 # Setup email smtp server\
-relayhost = [smtp.gmail.com]:587\
+relayhost = $relayhost
 smtp_sasl_auth_enable = yes\
 smtp_sasl_password_maps = hash:\/etc\/postfix\/sasl_passwd\
 smtp_sasl_security_options = noanonymous\
@@ -53,9 +46,62 @@ smtp_use_tls = yes\
 # Create & modify file sasl_passwd
 sudo touch /etc/postfix/sasl_passwd
 sudo chmod 777 /etc/postfix/sasl_passwd
-sudo echo "[smtp.gmail.com]:587 username@gmail.com:gmail_password" >> /etc/postfix/sasl_passwd
+sudo echo $gmailPassword >> /etc/postfix/sasl_passwd
 sudo chmod 400 /etc/postfix/sasl_passwd
 sudo postmap /etc/postfix/sasl_passwd
+
+
+# Add phone phone numbers for text alerting
+echo "Adding mobile phone numbers for text alerts"
+echo "Getting config items from file"
+source garagebuddy.config
+
+# Update alert for each active garage door
+echo "Modify the pi_garage_alert_config.py for each active garage door"
+if($garageDoor1){
+echo "Garage door 1 is active.  Updating config file for garage door 1"
+#sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/$garageDoor1CommentCode//g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor1Name/$garageDoor1Name/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor1Pin/$garageDoor1Pin/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor1AlertEmailAddress1/$garageDoor1AlertEmailAddress1/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor1AlarmOpenTimeOpen1/$garageDoor1AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor1AlertEmailAddress2/$garageDoor1AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor1AlarmOpenTimeOpen2/$garageDoor1AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
+}
+if($garageDoor2){
+echo "Garage door 2 is active.  Updating config file for garage door 2"
+#sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/$garageDoor2CommentCode//g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor2Name/$garageDoor2Name/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor2Pin/$garageDoor1Pin/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor2AlertEmailAddress1/$garageDoor2AlertEmailAddress1/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor2AlarmOpenTimeOpen1/$garageDoor2AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor2AlertEmailAddress2/$garageDoor2AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor2AlarmOpenTimeOpen2/$garageDoor2AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
+}
+if($garageDoor3){
+echo "Garage door 3 is active.  Updating config file for garage door 3"
+#sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/$garageDoor3CommentCode//g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor3Name/$garageDoor3Name/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor3Pin/$garageDoor1Pin/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor3AlertEmailAddress1/$garageDoor3AlertEmailAddress1/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor3AlarmOpenTimeOpen1/$garageDoor3AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor3AlertEmailAddress2/$garageDoor3AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor3AlarmOpenTimeOpen2/$garageDoor3AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
+}
+
+# loop tough emails config items
+#for i in ${email//,/ }
+#do
+    # call your procedure/other scripts here below
+  #  echo "$i"
+#done
+
+# Update GPIO pin numbers
+echo "Update GPIO pin numbers"
+sudo sed -i-e 's/15/24/g' /usr/local/etc/pi_garage_alert_config.py
 
 # Reload postfix config
 sudo /etc/init.d/postfix reload
@@ -66,27 +112,4 @@ echo "test mail" | mail -s "test subject" username@example.com
 # Setup the garage alert as a service and starts when rebooted
 sudo update-rc.d pi_garage_alert defaults
 sudo service pi_garage_alert restart
-
-
-# Update pi_garage_alert_config file
-echo "********** Starting to update pi_garage_alert_config **********"
-
-# Add phone phone numbers for text alerting
-echo "Adding mobile phone numbers for text alerts"
-echo "Getting config items from file"
-source garagebuddy.config
-echo "emailfomr config: " $email 
-# loop tough emails config items
-for i in ${email//,/ }
-do
-    # call your procedure/other scripts here below
-    echo "$i"
-done
-
-
-sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
-
-# Update GPIO pin numbers
-echo "Update GPIO pin numbers"
-sudo sed -i-e 's/15/24/g' /usr/local/etc/pi_garage_alert_config.py
 
