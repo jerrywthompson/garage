@@ -56,38 +56,46 @@ echo "Adding mobile phone numbers for text alerts"
 
 # Update alert for each active garage door
 echo "Modify the pi_garage_alert_config.py for each active garage door"
-if[$garageDoor1]; then
-	echo "Garage door 1 is active.  Updating config file for garage door 1"
-	#sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/$garageDoor1CommentCode//g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor1Name/$garageDoor1Name/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor1Pin/$garageDoor1Pin/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor1AlertEmailAddress1/$garageDoor1AlertEmailAddress1/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor1AlarmOpenTimeOpen1/$garageDoor1AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor1AlertEmailAddress2/$garageDoor1AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor1AlarmOpenTimeOpen2/$garageDoor1AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
+if [ $garageDoor1 = "active"]; 
+	then
+		echo "Garage door 1 is active.  Updating config file for garage door 1"
+		#sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/$garageDoor1CommentCode//g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor1Name/$garageDoor1Name/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor1Pin/$garageDoor1Pin/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor1AlertEmailAddress1/$garageDoor1AlertEmailAddress1/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor1AlarmOpenTimeOpen1/$garageDoor1AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor1AlertEmailAddress2/$garageDoor1AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor1AlarmOpenTimeOpen2/$garageDoor1AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
+	else "Garage Door 1 is not active"
 fi
-if[$garageDoor2]; then
-	echo "Garage door 2 is active.  Updating config file for garage door 2"
-	#sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/$garageDoor2CommentCode//g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor2Name/$garageDoor2Name/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor2Pin/$garageDoor2Pin/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor2AlertEmailAddress1/$garageDoor2AlertEmailAddress1/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor2AlarmOpenTimeOpen1/$garageDoor2AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor2AlertEmailAddress2/$garageDoor2AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor2AlarmOpenTimeOpen2/$garageDoor2AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
+
+if [ $garageDoor2 = "active" ]; 
+	then
+		echo "Garage door 2 is active.  Updating config file for garage door 2"
+		#sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/$garageDoor2CommentCode//g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor2Name/$garageDoor2Name/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor2Pin/$garageDoor2Pin/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor2AlertEmailAddress1/$garageDoor2AlertEmailAddress1/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor2AlarmOpenTimeOpen1/$garageDoor2AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor2AlertEmailAddress2/$garageDoor2AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor2AlarmOpenTimeOpen2/$garageDoor2AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
+	else "Garage Door 2 is not active"
 fi
-if[$garageDoor3]; then
-	echo "Garage door 3 is active.  Updating config file for garage door 3"
-	#sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/$garageDoor3CommentCode//g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor3Name/$garageDoor3Name/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor3Pin/$garageDoor3Pin/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor3AlertEmailAddress1/$garageDoor3AlertEmailAddress1/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor3AlarmOpenTimeOpen1/$garageDoor3AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor3AlertEmailAddress2/$garageDoor3AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
-	sudo sed -i -e 's/garageDoor3AlarmOpenTimeOpen2/$garageDoor3AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
+
+if [ $garageDoor3 = "active"]; 
+	then
+		echo "Garage door 3 is active.  Updating config file for garage door 3"
+		#sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/$garageDoor3CommentCode//g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor3Name/$garageDoor3Name/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor3Pin/$garageDoor3Pin/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor3AlertEmailAddress1/$garageDoor3AlertEmailAddress1/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor3AlarmOpenTimeOpen1/$garageDoor3AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor3AlertEmailAddress2/$garageDoor3AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e 's/garageDoor3AlarmOpenTimeOpen2/$garageDoor3AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
+	else "Garage Door 3 is not active"
 fi
 
 # loop tough emails config items
