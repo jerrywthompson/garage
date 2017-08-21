@@ -74,7 +74,7 @@ echo "Garage door 2 is active.  Updating config file for garage door 2"
 #sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
 sudo sed -i -e 's/$garageDoor2CommentCode//g' /usr/local/etc/pi_garage_alert_config.py
 sudo sed -i -e 's/garageDoor2Name/$garageDoor2Name/g' /usr/local/etc/pi_garage_alert_config.py
-sudo sed -i -e 's/garageDoor2Pin/$garageDoor1Pin/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor2Pin/$garageDoor2Pin/g' /usr/local/etc/pi_garage_alert_config.py
 sudo sed -i -e 's/garageDoor2AlertEmailAddress1/$garageDoor2AlertEmailAddress1/g' /usr/local/etc/pi_garage_alert_config.py
 sudo sed -i -e 's/garageDoor2AlarmOpenTimeOpen1/$garageDoor2AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
 sudo sed -i -e 's/garageDoor2AlertEmailAddress2/$garageDoor2AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
@@ -85,7 +85,7 @@ echo "Garage door 3 is active.  Updating config file for garage door 3"
 #sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
 sudo sed -i -e 's/$garageDoor3CommentCode//g' /usr/local/etc/pi_garage_alert_config.py
 sudo sed -i -e 's/garageDoor3Name/$garageDoor3Name/g' /usr/local/etc/pi_garage_alert_config.py
-sudo sed -i -e 's/garageDoor3Pin/$garageDoor1Pin/g' /usr/local/etc/pi_garage_alert_config.py
+sudo sed -i -e 's/garageDoor3Pin/$garageDoor3Pin/g' /usr/local/etc/pi_garage_alert_config.py
 sudo sed -i -e 's/garageDoor3AlertEmailAddress1/$garageDoor3AlertEmailAddress1/g' /usr/local/etc/pi_garage_alert_config.py
 sudo sed -i -e 's/garageDoor3AlarmOpenTimeOpen1/$garageDoor3AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
 sudo sed -i -e 's/garageDoor3AlertEmailAddress2/$garageDoor3AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
@@ -100,8 +100,8 @@ sudo sed -i -e 's/garageDoor3AlarmOpenTimeOpen2/$garageDoor3AlarmOpenTimeOpen2/g
 #done
 
 # Update GPIO pin numbers
-echo "Update GPIO pin numbers"
-sudo sed -i-e 's/15/24/g' /usr/local/etc/pi_garage_alert_config.py
+#echo "Update GPIO pin numbers"
+#sudo sed -i-e 's/15/24/g' /usr/local/etc/pi_garage_alert_config.py
 
 # Reload postfix config
 sudo /etc/init.d/postfix reload
