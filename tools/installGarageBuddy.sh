@@ -56,7 +56,7 @@ echo "Adding mobile phone numbers for text alerts"
 
 # Update alert for each active garage door
 echo "Modify the pi_garage_alert_config.py for each active garage door"
-if [ $garageDoor1 = "active"]; 
+if [ $garageDoor1 = "active" ]; 
 	then
 		echo "Garage door 1 is active.  Updating config file for garage door 1"
 		#sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
@@ -84,7 +84,7 @@ if [ $garageDoor2 = "active" ];
 	else "Garage Door 2 is not active"
 fi
 
-if [ $garageDoor3 = "active"]; 
+if [ $garageDoor3 = "active" ]; 
 	then
 		echo "Garage door 3 is active.  Updating config file for garage door 3"
 		#sudo sed -i -e 's/emailAddressHere/'"'"'email:123456789@messaging.sprintpcs.com'"'"', '"'"'email:123456789@tmomail.net'"'"'/g' /usr/local/etc/pi_garage_alert_config.py
