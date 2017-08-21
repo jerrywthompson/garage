@@ -67,7 +67,7 @@ if [ $garageDoor1 = "active" ];
 		sudo sed -i -e 's/garageDoor1AlarmOpenTimeOpen1/$garageDoor1AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e 's/garageDoor1AlertEmailAddress2/$garageDoor1AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e 's/garageDoor1AlarmOpenTimeOpen2/$garageDoor1AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
-	else "Garage Door 1 is not active"
+	else echo "Garage Door 1 is not active"
 fi
 
 if [ $garageDoor2 = "active" ]; 
@@ -81,7 +81,7 @@ if [ $garageDoor2 = "active" ];
 		sudo sed -i -e 's/garageDoor2AlarmOpenTimeOpen1/$garageDoor2AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e 's/garageDoor2AlertEmailAddress2/$garageDoor2AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e 's/garageDoor2AlarmOpenTimeOpen2/$garageDoor2AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
-	else "Garage Door 2 is not active"
+	else echo "Garage Door 2 is not active"
 fi
 
 if [ $garageDoor3 = "active" ]; 
@@ -95,7 +95,7 @@ if [ $garageDoor3 = "active" ];
 		sudo sed -i -e 's/garageDoor3AlarmOpenTimeOpen1/$garageDoor3AlarmOpenTimeOpen1/g' /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e 's/garageDoor3AlertEmailAddress2/$garageDoor3AlertEmailAddress2/g' /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e 's/garageDoor3AlarmOpenTimeOpen2/$garageDoor3AlarmOpenTimeOpen2/g' /usr/local/etc/pi_garage_alert_config.py
-	else "Garage Door 3 is not active"
+	else echo "Garage Door 3 is not active"
 fi
 
 # loop tough emails config items
