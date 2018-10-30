@@ -124,7 +124,7 @@ fi
 sudo /etc/init.d/postfix reload
 
 #Send yourself a test email.  Replace username@example.com with your email address.
-echo "test mail" | mail -s "test subject" jt7561@gmail.com
+echo "test mail" | mail -s "Email test from installation of GarageBuddy" jt7561@gmail.com
 
 # Setup the garage alert as a service and starts when rebooted
 sudo update-rc.d pi_garage_alert defaults
