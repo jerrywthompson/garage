@@ -1,7 +1,14 @@
 #!/bin/bash
 
-### run the script with this command to write output to file and screen
-##   unbuffer bash installGarageBuddy.sh 2>&1 | tee garagebuddy.log
+### Installation steps:
+### Clone Project from GitHub
+##  	git clone https://github.com/jerrywthompson/garagebuddy.git && cd garagebuddy
+### Update the oonfig file located here:   /home/pi/garagebuddy/garagebuddy.config
+### Install expect with the following commnad
+## 		sudo apt-get -y install expect
+### Run the install script from /home/pi/garagebuddy Note: script is inside of /tools but run from garagebuddy directory
+##  	unbuffer bash tools/installGarageBuddy.sh 2>&1 | tee garagebuddy.log
+
 
 # Update Raspbian
 echo "Updating the Raspbian image"
@@ -9,10 +16,12 @@ sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y dist-upgrade
 
+
 # Install core apps
 echo "Installng python and other core applications "
 sudo apt-get -y install python-setuptools python-dev libffi-dev libssl-dev
 sudo pip install -U Requests
+
 
 # Install and configure the alert
 echo "Installng the GarageBuddy alert"
@@ -20,6 +29,7 @@ echo "Installng the GarageBuddy alert"
 # get config items
 echo "Getting config items from file"
 source garagebuddy.config
+
 
 cd pi_garage_alert
 sudo cp bin/pi_garage_alert.py /usr/local/sbin/
@@ -33,15 +43,16 @@ sudo debconf-set-selections <<< $hostName
 sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 echo "Updating /ect/postfix/main.cf"
-sudo sed -i -e 's/relayhost =/\
-# Setup email smtp server\
-relayhost = $relayhost\
+sudo sed -i -e 's/relayhost=/\
+# Setup email smtp server for GarageBuddy\
+relayhost = [smtp.gmail.com]:587\
 smtp_sasl_auth_enable = yes\
 smtp_sasl_password_maps = hash:\/etc\/postfix\/sasl_passwd\
 smtp_sasl_security_options = noanonymous\
 smtp_tls_CAfile = \/etc\/ssl\/certs\/ca-certificates.crt\
 smtp_use_tls = yes\
 /g' /etc/postfix/main.cf 
+
 
 # Create & modify file sasl_passwd
 sudo touch /etc/postfix/sasl_passwd
@@ -113,9 +124,10 @@ fi
 sudo /etc/init.d/postfix reload
 
 #Send yourself a test email.  Replace username@example.com with your email address.
-echo "test mail" | mail -s "test subject" username@example.com
+echo "test mail" | mail -s "test subject" jt7561@gmail.com
 
 # Setup the garage alert as a service and starts when rebooted
 sudo update-rc.d pi_garage_alert defaults
 sudo service pi_garage_alert restart
 
+echo "Script complete"
