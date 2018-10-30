@@ -7,7 +7,8 @@
 ### Install expect with the following commnad
 ## 		sudo apt-get -y install expect
 ### Run the install script from /home/pi/garagebuddy Note: script is inside of /tools but run from garagebuddy directory
-##  	unbuffer bash tools/installGarageBuddy.sh 2>&1 | tee garagebuddy.log
+##  	unbuffer bash tools/installGarageBuddy.sh 2>&1 | tee garageBuddyInstall.log
+#### NOTE:  Runtime logs are stored here:  tail -f /var/log/pi_garage_alert.log
 
 
 echo "********** Script started *********"
@@ -15,15 +16,15 @@ echo "********** Script started *********"
 # Update Raspbian
 echo "Updating the Raspbian image"
 echo $PWD
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -y dist-upgrade
+###sudo apt-get -y update
+###sudo apt-get -y upgrade
+###sudo apt-get -y dist-upgrade
 
 
 # Install core apps
 echo "Installng python and other core applications "
-sudo apt-get -y install python-setuptools python-dev libffi-dev libssl-dev
-sudo pip install -U Requests
+###sudo apt-get -y install python-setuptools python-dev libffi-dev libssl-dev
+###sudo pip install -U Requests
 
 
 # Install and configure the alert
@@ -45,7 +46,7 @@ sudo apt-get clean
 
 sudo debconf-set-selections <<< $hostName
 sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
-sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
+####################sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 echo "Updating /ect/postfix/main.cf"
 sudo sed -i -e 's/relayhost=/\
 # Setup email smtp server for GarageBuddy\
@@ -56,7 +57,6 @@ smtp_sasl_security_options = noanonymous\
 smtp_tls_CAfile = \/etc\/ssl\/certs\/ca-certificates.crt\
 smtp_use_tls = yes\
 /g' /etc/postfix/main.cf 
-
 
 
 # Create & modify file sasl_passwd
@@ -70,6 +70,9 @@ sudo postmap /etc/postfix/sasl_passwd
 # Add phone phone numbers for text alerting
 echo "Adding mobile phone numbers for text alerts"
 
+echo "emailAddresses: "
+echo $emailAddresses
+
 
 # Configure for each active garage door
 echo "Modify the pi_garage_alert_config.py for each active garage door"
@@ -80,9 +83,9 @@ if [ $garageDoor1 = "active" ];
 		sudo sed -i -e "s/$garageDoor1CommentCode//g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor1Name/$garageDoor1Name/g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor1Pin/$garageDoor1Pin/g" /usr/local/etc/pi_garage_alert_config.py
-		sudo sed -i -e "s/garageDoor1AlertEmailAddress1/$garageDoor1AlertEmailAddress1/g" /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e "s/garageDoor1AlertEmailAddress1/$emailAddresses/g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor1AlarmOpenTimeOpen1/$garageDoor1AlarmOpenTimeOpen1/g" /usr/local/etc/pi_garage_alert_config.py
-		sudo sed -i -e "s/garageDoor1AlertEmailAddress2/$garageDoor1AlertEmailAddress2/g" /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e "s/garageDoor1AlertEmailAddress2/$emailAddresses/g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor1AlarmOpenTimeOpen2/$garageDoor1AlarmOpenTimeOpen2/g" /usr/local/etc/pi_garage_alert_config.py
 	else echo "Garage Door 1 is not active"
 fi
@@ -94,9 +97,9 @@ if [ $garageDoor2 = "active" ];
 		sudo sed -i -e "s/$garageDoor2CommentCode//g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor2Name/$garageDoor2Name/g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor2Pin/$garageDoor2Pin/g" /usr/local/etc/pi_garage_alert_config.py
-		sudo sed -i -e "s/garageDoor2AlertEmailAddress1/$garageDoor2AlertEmailAddress1/g" /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e "s/garageDoor2AlertEmailAddress1/$emailAddresses/g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor2AlarmOpenTimeOpen1/$garageDoor2AlarmOpenTimeOpen1/g" /usr/local/etc/pi_garage_alert_config.py
-		sudo sed -i -e "s/garageDoor2AlertEmailAddress2/$garageDoor2AlertEmailAddress2/g" /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e "s/garageDoor2AlertEmailAddress2/$emailAddresses/g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor2AlarmOpenTimeOpen2/$garageDoor2AlarmOpenTimeOpen2/g" /usr/local/etc/pi_garage_alert_config.py
 	else echo "Garage Door 2 is not active"
 fi
@@ -108,9 +111,9 @@ if [ $garageDoor3 = "active" ];
 		sudo sed -i -e "s/$garageDoor3CommentCode//g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor3Name/$garageDoor3Name/g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor3Pin/$garageDoor3Pin/g" /usr/local/etc/pi_garage_alert_config.py
-		sudo sed -i -e "s/garageDoor3AlertEmailAddress1/$garageDoor3AlertEmailAddress1/g" /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e "s/garageDoor3AlertEmailAddress1/$emailAddresses/g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor3AlarmOpenTimeOpen1/$garageDoor3AlarmOpenTimeOpen1/g" /usr/local/etc/pi_garage_alert_config.py
-		sudo sed -i -e "s/garageDoor3AlertEmailAddress2/$garageDoor3AlertEmailAddress2/g" /usr/local/etc/pi_garage_alert_config.py
+		sudo sed -i -e "s/garageDoor3AlertEmailAddress2/$emailAddresses/g" /usr/local/etc/pi_garage_alert_config.py
 		sudo sed -i -e "s/garageDoor3AlarmOpenTimeOpen2/$garageDoor3AlarmOpenTimeOpen2/g" /usr/local/etc/pi_garage_alert_config.py
 	else echo "Garage Door 3 is not active"
 fi
@@ -127,3 +130,4 @@ sudo update-rc.d pi_garage_alert defaults
 sudo service pi_garage_alert restart
 
 echo "Script complete"
+
