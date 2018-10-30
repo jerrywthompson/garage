@@ -27,8 +27,7 @@ sudo pip install -U Requests
 
 
 # Install and configure the alert
-echo "Installng the GarageBuddy alert"
-#git clone https://github.com/rllynch/pi_garage_alert.git
+echo "***** Begin installng the GarageBuddy alert *****"
 # get config items
 echo "***** Getting config items from file located here: /home/pi/garagebuddy/garagebuddy.config ***** "
 source garagebuddy.config
@@ -72,7 +71,7 @@ sudo postmap /etc/postfix/sasl_passwd
 echo "Adding mobile phone numbers for text alerts"
 
 
-# Update alert for each active garage door
+# Configure for each active garage door
 echo "Modify the pi_garage_alert_config.py for each active garage door"
 if [ $garageDoor1 = "active" ]; 
 	then
@@ -116,16 +115,6 @@ if [ $garageDoor3 = "active" ];
 	else echo "Garage Door 3 is not active"
 fi
 
-# loop tough emails config items
-#for i in ${email//,/ }
-#do
-    # call your procedure/other scripts here below
-  #  echo "$i"
-#done
-
-# Update GPIO pin numbers
-#echo "Update GPIO pin numbers"
-#sudo sed -i-e 's/15/24/g' /usr/local/etc/pi_garage_alert_config.py
 
 # Reload postfix config
 sudo /etc/init.d/postfix reload
@@ -138,4 +127,3 @@ sudo update-rc.d pi_garage_alert defaults
 sudo service pi_garage_alert restart
 
 echo "Script complete"
-
