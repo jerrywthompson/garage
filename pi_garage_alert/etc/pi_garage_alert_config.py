@@ -6,39 +6,54 @@
 
 # Describes all the garage doors being monitored
 GARAGE_DOORS = [
-#    {
-#        'pin': 16,
-#        'name': "Garage Door 1",
-#        'alerts': [
-#            {
-#                'state': 'open',
-#                'time': 120,
-#                'recipients': [ 'sms:+11112223333', 'sms:+14445556666' ]
-#            },
-#            {
-#                'state': 'open',
-#                'time': 600,
-#                'recipients': [ 'sms:+11112223333', 'sms:+14445556666' ]
-#            }
-#        ]
-#    },
-
-    {
-        'pin': 15,
-        'name': "Example Garage Door",
-        'alerts': [
-#            {
-#                'state': 'open',
-#                'time': 120,
-#                'recipients': [ 'sms:+11112223333', 'email:someone@example.com', 'twitter_dm:twitter_user', 'pushbullet:access_token', 'gcm', 'tweet', 'ifttt:garage_door' ]
-#            },
-#            {
-#                'state': 'open',
-#                'time': 600,
-#                'recipients': [ 'sms:+11112223333', 'email:someone@example.com', 'twitter_dm:twitter_user', 'pushbullet:access_token', 'gcm', 'tweet', 'ifttt:garage_door' ]
-#            }
-        ]
-    }
+#1#    {
+#1#        'pin': garageDoor1Pin,
+#1#        'name': "garageDoor1Name",
+#1#        'alerts': [
+#1#            {
+#1#                'state': 'open',
+#1#                'time': garageDoor1AlarmOpenTimeOpen1,
+#1#                'recipients': [ garageDoor1AlertEmailAddress1 ]
+#1#            },
+#1#            {
+#1#                'state': 'open',
+#1#                'time': garageDoor1AlarmOpenTimeOpen2,
+#1#                'recipients': [ garageDoor1AlertEmailAddress2 ]
+#1#         }
+#1#        ]
+#1#    }
+#2#    , {
+#2#        'pin': garageDoor2Pin,
+#2#        'name': "garageDoor2Name",
+#2#        'alerts': [
+#2#            {
+#2#                'state': 'open',
+#2#                'time': garageDoor2AlarmOpenTimeOpen1,
+#2#                'recipients': [ garageDoor2AlertEmailAddress1 ]
+#2#            },
+#2#            {
+#2#                'state': 'open',
+#2#                'time': garageDoor2AlarmOpenTimeOpen2,
+#2#                'recipients': [ garageDoor2AlertEmailAddress2 ]
+#2#            }
+#2#        ]
+#2#    }
+#3#    , {
+#3#        'pin': garageDoor3Pin,
+#3#        'name': "garageDoor3Name",
+#3#        'alerts': [
+#3#            {
+#3#                'state': 'open',
+#3#                'time': garageDoor3AlarmOpenTimeOpen1,
+#3#                'recipients': [ garageDoor3AlertEmailAddress1 ]
+#3#            },
+#3#            {
+#3#                'state': 'open',
+#3#                'time': garageDoor3AlarmOpenTimeOpen2,
+#3#                'recipients': [ garageDoor3AlertEmailAddress2 ]
+#3#            }
+#3#        ]
+#3#    }
 ]
 
 # All messages will be logged to stdout and this file
