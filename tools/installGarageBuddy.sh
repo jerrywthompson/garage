@@ -16,15 +16,15 @@ echo "********** Script started *********"
 # Update Raspbian
 echo "Updating the Raspbian image"
 echo $PWD
-###sudo apt-get -y update
-###sudo apt-get -y upgrade
-###sudo apt-get -y dist-upgrade
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y dist-upgrade
 
 
 # Install core apps
 echo "Installng python and other core applications "
-###sudo apt-get -y install python-setuptools python-dev libffi-dev libssl-dev
-###sudo pip install -U Requests
+sudo apt-get -y install python-setuptools python-dev libffi-dev libssl-dev
+sudo pip install -U Requests
 
 
 # Install and configure the alert
@@ -46,7 +46,7 @@ sudo apt-get clean
 
 sudo debconf-set-selections <<< $hostName
 sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
-####################sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
+sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 echo "Updating /ect/postfix/main.cf"
 sudo sed -i -e 's/relayhost=/\
 # Setup email smtp server for GarageBuddy\
