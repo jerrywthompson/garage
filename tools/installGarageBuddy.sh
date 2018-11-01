@@ -16,18 +16,18 @@ echo "********** Script started *********"
 # Update Raspbian
 echo "Updating the Raspbian image"
 echo $PWD
-###sudo apt-get -y update
-###sudo apt-get -y upgrade
-###sudo apt-get -y dist-upgrade
 
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y dist-upgrade
 
 # Install core apps
 echo "Installng python and other core applications "
-###sudo apt-get -y install python-setuptools python-dev libffi-dev libssl-dev
-###sudo pip install -U Requests
+sudo apt-get -y install python-setuptools python-dev libffi-dev libssl-dev
+sudo pip install -U Requests
 
 
-# Install and configure the alert
+# Install and configure the alerting engine
 echo "***** Begin installng the GarageBuddy alert *****"
 # get config items
 echo "***** Getting config items from file located here: /home/pi/garagebuddy/garagebuddy.config ***** "
@@ -43,12 +43,12 @@ sudo cp init.d/pi_garage_alert /etc/init.d/
 sudo chown pi /usr/local/etc/pi_garage_alert_config.py
 sudo apt-get clean
 
-
 sudo debconf-set-selections <<< $hostName
 sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
-####################sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
+sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 echo "Updating /ect/postfix/main.cf"
 sudo sed -i -e 's/relayhost=/\
+
 # Setup email smtp server for GarageBuddy\
 relayhost = [smtp.gmail.com]:587\
 smtp_sasl_auth_enable = yes\
@@ -65,14 +65,6 @@ sudo chmod 777 /etc/postfix/sasl_passwd
 sudo echo $gmailPassword >> /etc/postfix/sasl_passwd
 sudo chmod 400 /etc/postfix/sasl_passwd
 sudo postmap /etc/postfix/sasl_passwd
-
-
-# Add phone phone numbers for text alerting
-echo "Adding mobile phone numbers for text alerts"
-
-echo "emailAddresses: "
-echo $emailAddresses
-
 
 # Configure for each active garage door
 echo "Modify the pi_garage_alert_config.py for each active garage door"
@@ -122,12 +114,36 @@ fi
 # Reload postfix config
 sudo /etc/init.d/postfix reload
 
-#Send yourself a test email.  Replace username@example.com with your email address.
-echo "test mail" | mail -s "Email test from installation of GarageBuddy" jt7561@gmail.com
+#Send a test email.  Replace username@example.com with your email address.
+echo "test mail" | mail -s "Email test from installation of GarageBuddy" *******@gmail.com
 
 # Setup the garage alert as a service and starts when rebooted
 sudo update-rc.d pi_garage_alert defaults
 sudo service pi_garage_alert restart
+
+echo "Script has completed setting the alert process."
+
+# ********************* Setup and configure garage door remote control **********************
+echo "***** Begin setup and configuration of the garage door remote control"
+
+# Setup Apache/php
+echo "***** Setting up and configuring Apache *****"
+sudo apt-get install apache2 -y
+sudo apt-get install php5 libapache2-mod-php5 -y
+
+# Copy webpage files
+echo "Configuring and moving webpage files"
+# navigate to the webpage directory
+echo "********** Naivgate to /home/pi/garaagebuddy/www **********"
+cd /home/pi/garagebuddy/webpage
+# removed directory if exists
+echo "********** Delete /var/www/html/garagebuddy directory if present **********"
+sudo rm -rf /var/www/html/garagebuddy 
+
+# create new directory & copy all files and folders
+echo "********** Create and copy all files and folders to /var/www/html/garagebuddy **********"
+sudo mkdir /var/www/html/garagebuddy && cp -vr *  /var/www/html/garagebuddy/
+
 
 echo "Script complete"
 
