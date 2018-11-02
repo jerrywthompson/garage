@@ -118,9 +118,9 @@ fi
 echo "Reload postfix config"
 sudo /etc/init.d/postfix reload
 
-#Send a test email.  Replace username@example.com with your email address.
+#Send a test email.
 echo "Send a test email"
-echo "test mail" | mail -s "Email test from installation of GarageBuddy" *******@gmail.com
+echo "test mail" | mail -s "Email test from installation of GarageBuddy" $testEmail
 
 # Setup the garage alert as a service and starts when rebooted
 echo "Setup the garage alert as a service and starts when rebooted"
