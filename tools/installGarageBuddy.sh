@@ -45,7 +45,7 @@ sudo apt-get clean
 
 # Install and configure postfix
 echo "***** Begin install and configure postfix"
-sudo debconf-set-selections <<< "raspberrypi"
+sudo debconf-set-selections <<< "postfix postfix/mailname string raspberrypi"
 sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 
