@@ -43,7 +43,7 @@ sudo cp init.d/pi_garage_alert /etc/init.d/
 sudo chown pi /usr/local/etc/pi_garage_alert_config.py
 sudo apt-get clean
 
-sudo debconf-set-selections <<< $hostName
+sudo debconf-set-selections <<< "raspberrypi"
 sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 echo "Updating /ect/postfix/main.cf"
