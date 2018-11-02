@@ -2,7 +2,7 @@
 
 ### Installation steps:
 ### Clone Project from GitHub
-##  	git clone https://github.com/jerrywthompson/garagebuddy.git && cd garagebuddy && sudo apt-get -y install expect
+##  	git clone https://github.com/jerrywthompson/garagebuddy.git && cd garagebuddy && git checkout master && sudo apt-get -y install expect
 ### Update the oonfig file located here:   /home/pi/garagebuddy/garagebuddy.config
 ### Install expect with the following commnad
 ## 		sudo apt-get -y install expect
