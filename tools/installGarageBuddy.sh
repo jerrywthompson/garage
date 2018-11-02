@@ -26,7 +26,6 @@ echo "Installng python and other core applications "
 sudo apt-get -y install python-setuptools python-dev libffi-dev libssl-dev
 sudo pip install -U Requests
 
-
 # Install and configure the alerting engine
 echo "***** Begin installng the GarageBuddy alert *****"
 # get config items
@@ -36,6 +35,7 @@ source garagebuddy.config
 echo "***** Copy files and folders from /home/pi/garagebuddy/pi_garage_alert to permanent locations *****"
 echo "***** First change locations to: /home/pi/garagebuddy/pi_garage_alert *****"
 cd pi_garage_alert
+echo "***** New location: ***** "
 echo $PWD
 sudo cp bin/pi_garage_alert.py /usr/local/sbin/
 sudo cp etc/pi_garage_alert_config.py /usr/local/etc/
@@ -43,9 +43,12 @@ sudo cp init.d/pi_garage_alert /etc/init.d/
 sudo chown pi /usr/local/etc/pi_garage_alert_config.py
 sudo apt-get clean
 
+# Install and configure postfix
+echo "***** Begin install and configure postfix"
 sudo debconf-set-selections <<< "raspberrypi"
 sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
+
 echo "Updating /ect/postfix/main.cf"
 sudo sed -i -e 's/relayhost=/\
 # Setup email smtp server for GarageBuddy\
@@ -59,6 +62,7 @@ smtp_use_tls = yes\
 
 
 # Create & modify file sasl_passwd
+echo "***** Create & modify file sasl_passwd *****"
 sudo touch /etc/postfix/sasl_passwd
 sudo chmod 777 /etc/postfix/sasl_passwd
 sudo echo $gmailPassword >> /etc/postfix/sasl_passwd
@@ -66,7 +70,7 @@ sudo chmod 400 /etc/postfix/sasl_passwd
 sudo postmap /etc/postfix/sasl_passwd
 
 # Configure for each active garage door
-echo "Modify the pi_garage_alert_config.py for each active garage door"
+echo "Configure /usr/local/etc/pi_garage_alert_config.py for each active garage door"
 if [ $garageDoor1 = "active" ]; 
 	then
 		echo "Garage door 1 is active.  Updating config file for garage door 1"
@@ -111,12 +115,15 @@ fi
 
 
 # Reload postfix config
+echo "Reload postfix config"
 sudo /etc/init.d/postfix reload
 
-#Send a test email.  Replace username@example.com with your email address.
-echo "test mail" | mail -s "Email test from installation of GarageBuddy" *******@gmail.com
+#Send a test email.
+echo "Send a test email"
+echo "test mail" | mail -s "Email test from installation of GarageBuddy" $testEmail
 
 # Setup the garage alert as a service and starts when rebooted
+echo "Setup the garage alert as a service and starts when rebooted"
 sudo update-rc.d pi_garage_alert defaults
 sudo service pi_garage_alert restart
 
@@ -145,4 +152,3 @@ sudo mkdir /var/www/html/garagebuddy && sudo cp -vr *  /var/www/html/garagebuddy
 
 
 echo "Script complete"
-
