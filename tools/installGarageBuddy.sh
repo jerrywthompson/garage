@@ -135,7 +135,7 @@ echo "***** Begin setup and configuration of the garage door remote control"
 # Setup Apache/php
 echo "***** Setting up and configuring Apache *****"
 sudo apt-get install apache2 -y
-sudo apt-get install php5 libapache2-mod-php5 -y
+sudo apt-get install php php-mbstring
 
 # Copy webpage files
 echo "Configuring and moving webpage files"
