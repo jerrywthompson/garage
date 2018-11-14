@@ -50,7 +50,7 @@ sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Intern
 sudo apt-get -y install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 
 echo "Updating /ect/postfix/main.cf"
-sudo sed -i -e 's/relayhost=/\
+sudo sed -i -e 's/relayhost =/\
 # Setup email smtp server for GarageBuddy\
 relayhost = [smtp.gmail.com]:587\
 smtp_sasl_auth_enable = yes\
